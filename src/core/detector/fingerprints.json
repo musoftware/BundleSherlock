@@ -16,6 +16,20 @@
     "cdn": "https://nextjs.org"
   },
   {
+    "name": "Remix",
+    "category": "meta-framework",
+    "signatures": ["__remixContext", "RemixServer", "RemixBrowser", "useLoaderData"],
+    "weight": 12,
+    "cdn": "https://remix.run"
+  },
+  {
+    "name": "Gatsby",
+    "category": "meta-framework",
+    "signatures": ["___gatsby", "gatsby-route-wrapper", "___loader"],
+    "weight": 12,
+    "cdn": "https://www.gatsbyjs.com"
+  },
+  {
     "name": "Vue.js",
     "category": "ui-framework",
     "versionRegex": "Vue v(\\d+\\.\\d+\\.\\d+)",
@@ -48,20 +62,139 @@
     "cdn": "https://svelte.dev"
   },
   {
-    "name": "Lodash",
-    "category": "utility",
-    "versionRegex": "lodash (\\d+\\.\\d+\\.\\d+)",
-    "signatures": ["lodash", "debounce", "throttle", "isPlainObject", "cloneDeep"],
-    "weight": 8,
-    "cdn": "https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"
+    "name": "SvelteKit",
+    "category": "meta-framework",
+    "signatures": ["__sveltekit_", "sveltekit:page", "load"],
+    "weight": 12,
+    "cdn": "https://kit.svelte.dev"
   },
   {
-    "name": "Axios",
-    "category": "http-client",
-    "versionRegex": "axios v?(\\d+\\.\\d+\\.\\d+)",
-    "signatures": ["axios.create", "isAxiosError", "AxiosHeaders", "interceptors.request"],
+    "name": "Solid.js",
+    "category": "ui-framework",
+    "signatures": ["createComponent", "createSignal", "createEffect", "createMemo"],
+    "weight": 10,
+    "cdn": "https://www.solidjs.com"
+  },
+  {
+    "name": "Astro",
+    "category": "meta-framework",
+    "signatures": ["astro-island", "astro:scripts", "AstroComponent"],
+    "weight": 12,
+    "cdn": "https://astro.build"
+  },
+  {
+    "name": "Preact",
+    "category": "ui-framework",
+    "signatures": ["preact", "__b", "__r", "__h", "__e"],
+    "weight": 9,
+    "cdn": "https://preactjs.com"
+  },
+  {
+    "name": "Alpine.js",
+    "category": "ui-framework",
+    "signatures": ["Alpine.data", "Alpine.store", "x-data", "x-on"],
+    "weight": 9,
+    "cdn": "https://alpinejs.dev"
+  },
+  {
+    "name": "Lit",
+    "category": "web-components",
+    "signatures": ["LitElement", "customElement", "css`", "html`"],
+    "weight": 9,
+    "cdn": "https://lit.dev"
+  },
+  {
+    "name": "Qwik",
+    "category": "ui-framework",
+    "signatures": ["component$", "useSignal$", "useStore$", "qwikLoader"],
+    "weight": 10,
+    "cdn": "https://qwik.dev"
+  },
+  {
+    "name": "Material-UI (MUI)",
+    "category": "ui-components",
+    "signatures": ["@mui/material", "createTheme", "ThemeProvider", "MuiButton"],
+    "weight": 10,
+    "cdn": "https://mui.com"
+  },
+  {
+    "name": "Ant Design",
+    "category": "ui-components",
+    "signatures": ["ant-prefix", "AntdProvider", "antd/lib", "ant-btn"],
+    "weight": 10,
+    "cdn": "https://ant.design"
+  },
+  {
+    "name": "Chakra UI",
+    "category": "ui-components",
+    "signatures": ["ChakraProvider", "extendTheme", "useChakra", "chakra."],
+    "weight": 10,
+    "cdn": "https://chakra-ui.com"
+  },
+  {
+    "name": "Radix UI",
+    "category": "ui-primitives",
+    "signatures": ["@radix-ui", "createPrimitive", "Primitive."],
+    "weight": 9,
+    "cdn": "https://www.radix-ui.com"
+  },
+  {
+    "name": "Mantine",
+    "category": "ui-components",
+    "signatures": ["MantineProvider", "createStyles", "useMantineTheme"],
+    "weight": 10,
+    "cdn": "https://mantine.dev"
+  },
+  {
+    "name": "Headless UI",
+    "category": "ui-primitives",
+    "signatures": ["@headlessui/react", "@headlessui/vue", "Menu.Button"],
+    "weight": 9,
+    "cdn": "https://headlessui.com"
+  },
+  {
+    "name": "Tailwind CSS Runtime",
+    "category": "styling",
+    "signatures": ["tailwind.config", "tw-", "flex items-center justify-between"],
+    "weight": 6,
+    "cdn": "https://tailwindcss.com"
+  },
+  {
+    "name": "Styled Components",
+    "category": "styling",
+    "signatures": ["styled-components", "sc-component-id", "ServerStyleSheet"],
+    "weight": 9,
+    "cdn": "https://styled-components.com"
+  },
+  {
+    "name": "Emotion",
+    "category": "styling",
+    "signatures": ["@emotion/react", "@emotion/styled", "css`", "CacheProvider"],
+    "weight": 9,
+    "cdn": "https://emotion.sh"
+  },
+  {
+    "name": "Bootstrap",
+    "category": "ui-components",
+    "versionRegex": "Bootstrap v(\\d+\\.\\d+\\.\\d+)",
+    "signatures": ["bs.modal", "bs.carousel", "bs.tooltip", "bs.dropdown"],
     "weight": 8,
-    "cdn": "https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"
+    "cdn": "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+  },
+  {
+    "name": "jQuery",
+    "category": "dom-library",
+    "versionRegex": "jQuery v(\\d+\\.\\d+\\.\\d+)",
+    "signatures": ["jQuery", "fn.jquery", "find.matches", "addClass"],
+    "weight": 10,
+    "cdn": "https://code.jquery.com/jquery-3.7.1.min.js"
+  },
+  {
+    "name": "Redux Toolkit",
+    "category": "state-management",
+    "signatures": ["createSlice", "configureStore", "createAsyncThunk"],
+    "weight": 10,
+    "cdn": "https://redux-toolkit.js.org"
   },
   {
     "name": "Redux",
@@ -79,11 +212,53 @@
     "cdn": "https://github.com/pmndrs/zustand"
   },
   {
+    "name": "Jotai",
+    "category": "state-management",
+    "signatures": ["atom(", "useAtom", "useSetAtom", "useAtomValue"],
+    "weight": 8,
+    "cdn": "https://jotai.org"
+  },
+  {
+    "name": "Recoil",
+    "category": "state-management",
+    "signatures": ["RecoilRoot", "atom(", "selector(", "useRecoilState"],
+    "weight": 9,
+    "cdn": "https://recoiljs.org"
+  },
+  {
     "name": "MobX",
     "category": "state-management",
     "signatures": ["makeAutoObservable", "makeObservable", "observable", "action", "computed"],
     "weight": 8,
     "cdn": "https://cdnjs.cloudflare.com/ajax/libs/mobx/6.12.0/mobx.umd.production.min.js"
+  },
+  {
+    "name": "Valtio",
+    "category": "state-management",
+    "signatures": ["proxy(", "useSnapshot", "ref(", "subscribe("],
+    "weight": 8,
+    "cdn": "https://valtio.pmnd.rs"
+  },
+  {
+    "name": "XState",
+    "category": "state-machine",
+    "signatures": ["createMachine", "interpret", "useMachine", "assign("],
+    "weight": 9,
+    "cdn": "https://xstate.js.org"
+  },
+  {
+    "name": "Pinia",
+    "category": "state-management",
+    "signatures": ["defineStore", "createPinia", "getActivePinia"],
+    "weight": 9,
+    "cdn": "https://pinia.vuejs.org"
+  },
+  {
+    "name": "Vuex",
+    "category": "state-management",
+    "signatures": ["createStore", "mapState", "mapGetters", "mapActions"],
+    "weight": 8,
+    "cdn": "https://vuex.vuejs.org"
   },
   {
     "name": "TanStack Query",
@@ -93,20 +268,19 @@
     "cdn": "https://tanstack.com/query"
   },
   {
-    "name": "jQuery",
-    "category": "dom-library",
-    "versionRegex": "jQuery v(\\d+\\.\\d+\\.\\d+)",
-    "signatures": ["jQuery", "fn.jquery", "find.matches", "addClass"],
-    "weight": 10,
-    "cdn": "https://code.jquery.com/jquery-3.7.1.min.js"
+    "name": "SWR",
+    "category": "data-fetching",
+    "signatures": ["useSWR", "SWRConfig", "mutate(", "useSWRMutation"],
+    "weight": 9,
+    "cdn": "https://swr.vercel.app"
   },
   {
-    "name": "Bootstrap",
-    "category": "ui-components",
-    "versionRegex": "Bootstrap v(\\d+\\.\\d+\\.\\d+)",
-    "signatures": ["bs.modal", "bs.carousel", "bs.tooltip", "bs.dropdown"],
+    "name": "Axios",
+    "category": "http-client",
+    "versionRegex": "axios v?(\\d+\\.\\d+\\.\\d+)",
+    "signatures": ["axios.create", "isAxiosError", "AxiosHeaders", "interceptors.request"],
     "weight": 8,
-    "cdn": "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    "cdn": "https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"
   },
   {
     "name": "RxJS",
@@ -117,33 +291,27 @@
     "cdn": "https://cdnjs.cloudflare.com/ajax/libs/rxjs/7.8.1/rxjs.umd.min.js"
   },
   {
-    "name": "D3.js",
-    "category": "data-visualization",
-    "versionRegex": "d3 (\\d+\\.\\d+\\.\\d+)",
-    "signatures": ["d3.select", "d3.selectAll", "d3.scaleLinear", "d3.axisBottom"],
-    "weight": 9,
-    "cdn": "https://d3js.org/d3.v7.min.js"
-  },
-  {
-    "name": "Chart.js",
-    "category": "data-visualization",
-    "signatures": ["Chart.register", "Chart.helpers", "line", "bar", "doughnut"],
+    "name": "Lodash",
+    "category": "utility",
+    "versionRegex": "lodash (\\d+\\.\\d+\\.\\d+)",
+    "signatures": ["lodash", "debounce", "throttle", "isPlainObject", "cloneDeep"],
     "weight": 8,
-    "cdn": "https://cdn.jsdelivr.net/npm/chart.js"
+    "cdn": "https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"
   },
   {
-    "name": "Three.js",
-    "category": "3d-graphics",
-    "signatures": ["THREE.WebGLRenderer", "THREE.PerspectiveCamera", "THREE.Scene", "THREE.Mesh"],
-    "weight": 10,
-    "cdn": "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"
+    "name": "Underscore",
+    "category": "utility",
+    "versionRegex": "underscore (\\d+\\.\\d+\\.\\d+)",
+    "signatures": ["_.each", "_.map", "_.reduce", "_.findWhere"],
+    "weight": 8,
+    "cdn": "https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.6/underscore-min.js"
   },
   {
-    "name": "Lucide / Icons",
-    "category": "icons",
-    "signatures": ["createLucideIcon", "LucideIcon", "createElement"],
-    "weight": 6,
-    "cdn": "https://lucide.dev"
+    "name": "Ramda",
+    "category": "functional-utility",
+    "signatures": ["R.curry", "R.pipe", "R.map", "R.filter", "R.assoc"],
+    "weight": 8,
+    "cdn": "https://cdnjs.cloudflare.com/ajax/libs/ramda/0.29.1/ramda.min.js"
   },
   {
     "name": "Moment.js",
@@ -168,26 +336,173 @@
     "cdn": "https://date-fns.org"
   },
   {
-    "name": "Ramda",
-    "category": "functional-utility",
-    "signatures": ["R.curry", "R.pipe", "R.map", "R.filter", "R.assoc"],
+    "name": "Luxon",
+    "category": "date-utility",
+    "signatures": ["DateTime.local", "DateTime.fromISO", "Duration.fromMillis"],
     "weight": 8,
-    "cdn": "https://cdnjs.cloudflare.com/ajax/libs/ramda/0.29.1/ramda.min.js"
+    "cdn": "https://moment.github.io/luxon/"
   },
   {
-    "name": "Underscore",
-    "category": "utility",
-    "versionRegex": "underscore (\\d+\\.\\d+\\.\\d+)",
-    "signatures": ["_.each", "_.map", "_.reduce", "_.findWhere"],
-    "weight": 8,
-    "cdn": "https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.6/underscore-min.js"
-  },
-  {
-    "name": "Socket.io",
-    "category": "websockets",
-    "signatures": ["io.connect", "Socket.emit", "Socket.on", "Manager"],
+    "name": "SheetJS (XLSX)",
+    "category": "file-processing",
+    "signatures": ["XLSX.read", "XLSX.write", "XLSX.utils.json_to_sheet"],
     "weight": 9,
-    "cdn": "https://cdn.socket.io/4.7.5/socket.io.min.js"
+    "cdn": "https://cdn.sheetjs.com"
+  },
+  {
+    "name": "JSZip",
+    "category": "file-processing",
+    "signatures": ["JSZip.loadAsync", "JSZip.generateAsync", "file("],
+    "weight": 8,
+    "cdn": "https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"
+  },
+  {
+    "name": "D3.js",
+    "category": "data-visualization",
+    "versionRegex": "d3 (\\d+\\.\\d+\\.\\d+)",
+    "signatures": ["d3.select", "d3.selectAll", "d3.scaleLinear", "d3.axisBottom"],
+    "weight": 9,
+    "cdn": "https://d3js.org/d3.v7.min.js"
+  },
+  {
+    "name": "Chart.js",
+    "category": "data-visualization",
+    "signatures": ["Chart.register", "Chart.helpers", "line", "bar", "doughnut"],
+    "weight": 8,
+    "cdn": "https://cdn.jsdelivr.net/npm/chart.js"
+  },
+  {
+    "name": "ECharts",
+    "category": "data-visualization",
+    "signatures": ["echarts.init", "echarts.registerTheme", "setOption"],
+    "weight": 9,
+    "cdn": "https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"
+  },
+  {
+    "name": "Recharts",
+    "category": "data-visualization",
+    "signatures": ["ResponsiveContainer", "BarChart", "LineChart", "XAxis"],
+    "weight": 9,
+    "cdn": "https://recharts.org"
+  },
+  {
+    "name": "Three.js",
+    "category": "3d-graphics",
+    "signatures": ["THREE.WebGLRenderer", "THREE.PerspectiveCamera", "THREE.Scene", "THREE.Mesh"],
+    "weight": 10,
+    "cdn": "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"
+  },
+  {
+    "name": "PixiJS",
+    "category": "2d-graphics",
+    "signatures": ["PIXI.Application", "PIXI.Sprite", "PIXI.Container"],
+    "weight": 9,
+    "cdn": "https://pixijs.com"
+  },
+  {
+    "name": "Babylon.js",
+    "category": "3d-graphics",
+    "signatures": ["BABYLON.Engine", "BABYLON.Scene", "BABYLON.Vector3"],
+    "weight": 10,
+    "cdn": "https://www.babylonjs.com"
+  },
+  {
+    "name": "Framer Motion",
+    "category": "animation",
+    "signatures": ["motion.div", "AnimatePresence", "useAnimation", "useMotionValue"],
+    "weight": 9,
+    "cdn": "https://www.framer.com/motion/"
+  },
+  {
+    "name": "GSAP",
+    "category": "animation",
+    "signatures": ["gsap.to", "gsap.from", "gsap.timeline", "ScrollTrigger"],
+    "weight": 9,
+    "cdn": "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+  },
+  {
+    "name": "Lottie",
+    "category": "animation",
+    "signatures": ["lottie.loadAnimation", "bodymovin", "lottie-player"],
+    "weight": 8,
+    "cdn": "https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"
+  },
+  {
+    "name": "Anime.js",
+    "category": "animation",
+    "signatures": ["anime({", "anime.timeline", "anime.stagger"],
+    "weight": 8,
+    "cdn": "https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"
+  },
+  {
+    "name": "Zod",
+    "category": "validation",
+    "signatures": ["z.object", "z.string", "z.number", "z.infer", "safeParse"],
+    "weight": 8,
+    "cdn": "https://zod.dev"
+  },
+  {
+    "name": "Yup",
+    "category": "validation",
+    "signatures": ["yup.object", "yup.string", "yup.number", "validateSync"],
+    "weight": 8,
+    "cdn": "https://github.com/jquense/yup"
+  },
+  {
+    "name": "Valibot",
+    "category": "validation",
+    "signatures": ["v.object", "v.string", "v.parse", "v.safeParse"],
+    "weight": 8,
+    "cdn": "https://valibot.dev"
+  },
+  {
+    "name": "Formik",
+    "category": "forms",
+    "signatures": ["useFormik", "Formik", "Field", "ErrorMessage"],
+    "weight": 8,
+    "cdn": "https://formik.org"
+  },
+  {
+    "name": "React Hook Form",
+    "category": "forms",
+    "signatures": ["useForm", "register", "handleSubmit", "formState"],
+    "weight": 8,
+    "cdn": "https://react-hook-form.com"
+  },
+  {
+    "name": "Ethers.js",
+    "category": "web3",
+    "signatures": ["ethers.providers", "ethers.Contract", "ethers.utils.parseEther"],
+    "weight": 9,
+    "cdn": "https://cdnjs.cloudflare.com/ajax/libs/ethers/6.11.1/ethers.umd.min.js"
+  },
+  {
+    "name": "Web3.js",
+    "category": "web3",
+    "signatures": ["Web3.providers", "web3.eth.Contract", "web3.utils.toWei"],
+    "weight": 9,
+    "cdn": "https://cdnjs.cloudflare.com/ajax/libs/web3/4.7.0/web3.min.js"
+  },
+  {
+    "name": "Viem",
+    "category": "web3",
+    "signatures": ["createPublicClient", "createWalletClient", "parseEther"],
+    "weight": 9,
+    "cdn": "https://viem.sh"
+  },
+  {
+    "name": "Wagmi",
+    "category": "web3",
+    "signatures": ["createConfig", "useAccount", "useConnect", "useContractRead"],
+    "weight": 9,
+    "cdn": "https://wagmi.sh"
+  },
+  {
+    "name": "Solana Web3",
+    "category": "web3",
+    "signatures": ["@solana/web3.js", "Connection", "PublicKey", "Transaction"],
+    "weight": 9,
+    "cdn": "https://solana-labs.github.io/solana-web3.js/"
   },
   {
     "name": "Firebase",
@@ -205,6 +520,20 @@
     "cdn": "https://cdn.jsdelivr.net/npm/@supabase/supabase-js"
   },
   {
+    "name": "Appwrite",
+    "category": "baas",
+    "signatures": ["Appwrite", "Client()", "Account()", "Databases()"],
+    "weight": 9,
+    "cdn": "https://appwrite.io"
+  },
+  {
+    "name": "AWS SDK",
+    "category": "cloud-sdk",
+    "signatures": ["AWS.S3", "AWS.DynamoDB", "AWS.Config", "aws-sdk"],
+    "weight": 9,
+    "cdn": "https://aws.amazon.com/sdk-for-node-js/"
+  },
+  {
     "name": "Apollo Client",
     "category": "graphql",
     "signatures": ["ApolloClient", "InMemoryCache", "useQuery", "gql"],
@@ -219,109 +548,11 @@
     "cdn": "https://www.prisma.io"
   },
   {
-    "name": "Express / Server Router",
-    "category": "backend-routing",
-    "signatures": ["express.Router", "app.use", "req.params", "res.status"],
-    "weight": 7,
-    "cdn": "https://expressjs.com"
-  },
-  {
-    "name": "Fastify",
-    "category": "backend-routing",
-    "signatures": ["fastify.register", "fastify.decorate", "reply.send"],
-    "weight": 8,
-    "cdn": "https://fastify.io"
-  },
-  {
-    "name": "Zod",
-    "category": "validation",
-    "signatures": ["z.object", "z.string", "z.number", "z.infer", "safeParse"],
-    "weight": 8,
-    "cdn": "https://zod.dev"
-  },
-  {
-    "name": "Yup",
-    "category": "validation",
-    "signatures": ["yup.object", "yup.string", "yup.number", "validateSync"],
-    "weight": 8,
-    "cdn": "https://github.com/jquense/yup"
-  },
-  {
-    "name": "Joi",
-    "category": "validation",
-    "signatures": ["Joi.object", "Joi.string", "Joi.validate"],
-    "weight": 8,
-    "cdn": "https://joi.dev"
-  },
-  {
-    "name": "Formik",
-    "category": "forms",
-    "signatures": ["useFormik", "Formik", "Field", "ErrorMessage"],
-    "weight": 8,
-    "cdn": "https://formik.org"
-  },
-  {
-    "name": "React Hook Form",
-    "category": "forms",
-    "signatures": ["useForm", "register", "handleSubmit", "formState"],
-    "weight": 8,
-    "cdn": "https://react-hook-form.com"
-  },
-  {
-    "name": "Framer Motion",
-    "category": "animation",
-    "signatures": ["motion.div", "AnimatePresence", "useAnimation", "useMotionValue"],
+    "name": "Socket.io",
+    "category": "websockets",
+    "signatures": ["io.connect", "Socket.emit", "Socket.on", "Manager"],
     "weight": 9,
-    "cdn": "https://www.framer.com/motion/"
-  },
-  {
-    "name": "GSAP",
-    "category": "animation",
-    "signatures": ["gsap.to", "gsap.from", "gsap.timeline", "ScrollTrigger"],
-    "weight": 9,
-    "cdn": "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
-  },
-  {
-    "name": "Anime.js",
-    "category": "animation",
-    "signatures": ["anime({", "anime.timeline", "anime.stagger"],
-    "weight": 8,
-    "cdn": "https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"
-  },
-  {
-    "name": "Swiper",
-    "category": "ui-components",
-    "signatures": ["Swiper", "SwiperSlide", "swiper-container", "navigation"],
-    "weight": 8,
-    "cdn": "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"
-  },
-  {
-    "name": "Popper.js",
-    "category": "ui-components",
-    "signatures": ["createPopper", "popperGenerator", "modifierPhases"],
-    "weight": 7,
-    "cdn": "https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.8/umd/popper.min.js"
-  },
-  {
-    "name": "CryptoJS",
-    "category": "cryptography",
-    "signatures": ["CryptoJS.AES", "CryptoJS.SHA256", "CryptoJS.enc.Utf8"],
-    "weight": 8,
-    "cdn": "https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"
-  },
-  {
-    "name": "Ethers.js",
-    "category": "web3",
-    "signatures": ["ethers.providers", "ethers.Contract", "ethers.utils.parseEther"],
-    "weight": 9,
-    "cdn": "https://cdnjs.cloudflare.com/ajax/libs/ethers/6.11.1/ethers.umd.min.js"
-  },
-  {
-    "name": "Web3.js",
-    "category": "web3",
-    "signatures": ["Web3.providers", "web3.eth.Contract", "web3.utils.toWei"],
-    "weight": 9,
-    "cdn": "https://cdnjs.cloudflare.com/ajax/libs/web3/4.7.0/web3.min.js"
+    "cdn": "https://cdn.socket.io/4.7.5/socket.io.min.js"
   },
   {
     "name": "Sentry",
@@ -331,6 +562,13 @@
     "cdn": "https://browser.sentry-cdn.com"
   },
   {
+    "name": "PostHog",
+    "category": "analytics",
+    "signatures": ["posthog.init", "posthog.capture", "posthog.identify"],
+    "weight": 8,
+    "cdn": "https://posthog.com"
+  },
+  {
     "name": "Mixpanel",
     "category": "analytics",
     "signatures": ["mixpanel.init", "mixpanel.track", "mixpanel.identify"],
@@ -338,11 +576,18 @@
     "cdn": "https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js"
   },
   {
-    "name": "PostHog",
+    "name": "Amplitude",
     "category": "analytics",
-    "signatures": ["posthog.init", "posthog.capture", "posthog.identify"],
+    "signatures": ["amplitude.getInstance", "amplitude.track", "amplitude.init"],
     "weight": 8,
-    "cdn": "https://posthog.com"
+    "cdn": "https://amplitude.com"
+  },
+  {
+    "name": "Segment",
+    "category": "analytics",
+    "signatures": ["analytics.track", "analytics.identify", "analytics.page"],
+    "weight": 8,
+    "cdn": "https://segment.com"
   },
   {
     "name": "Google Analytics",
@@ -352,11 +597,74 @@
     "cdn": "https://www.googletagmanager.com/gtag/js"
   },
   {
-    "name": "Tailwind CSS Runtime",
-    "category": "styling",
-    "signatures": ["tailwind.config", "tw-", "flex items-center justify-between"],
+    "name": "Prism.js",
+    "category": "syntax-highlighter",
+    "signatures": ["Prism.languages", "Prism.highlight", "Prism.hooks"],
+    "weight": 9,
+    "cdn": "https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"
+  },
+  {
+    "name": "Highlight.js",
+    "category": "syntax-highlighter",
+    "signatures": ["hljs.highlight", "hljs.registerLanguage", "hljs.configure"],
+    "weight": 9,
+    "cdn": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"
+  },
+  {
+    "name": "Monaco Editor",
+    "category": "code-editor",
+    "signatures": ["monaco.editor", "monaco.languages", "createWebWorker"],
+    "weight": 10,
+    "cdn": "https://microsoft.github.io/monaco-editor/"
+  },
+  {
+    "name": "CodeMirror",
+    "category": "code-editor",
+    "signatures": ["CodeMirror.fromTextArea", "CodeMirror.defineMode", "EditorView"],
+    "weight": 9,
+    "cdn": "https://codemirror.net"
+  },
+  {
+    "name": "Quill Editor",
+    "category": "rich-text-editor",
+    "signatures": ["Quill.register", "new Quill(", "quill-container"],
+    "weight": 9,
+    "cdn": "https://quilljs.com"
+  },
+  {
+    "name": "TipTap",
+    "category": "rich-text-editor",
+    "signatures": ["@tiptap/core", "useEditor", "EditorContent"],
+    "weight": 9,
+    "cdn": "https://tiptap.dev"
+  },
+  {
+    "name": "Slate.js",
+    "category": "rich-text-editor",
+    "signatures": ["createEditor", "Slate", "Editable", "withReact"],
+    "weight": 9,
+    "cdn": "https://www.slatejs.org"
+  },
+  {
+    "name": "Lucide / Icons",
+    "category": "icons",
+    "signatures": ["createLucideIcon", "LucideIcon", "createElement"],
     "weight": 6,
-    "cdn": "https://tailwindcss.com"
+    "cdn": "https://lucide.dev"
+  },
+  {
+    "name": "FontAwesome",
+    "category": "icons",
+    "signatures": ["FontAwesomeIcon", "fa-solid", "fa-brands", "fontawesome"],
+    "weight": 8,
+    "cdn": "https://fontawesome.com"
+  },
+  {
+    "name": "Swiper",
+    "category": "ui-components",
+    "signatures": ["Swiper", "SwiperSlide", "swiper-container", "navigation"],
+    "weight": 8,
+    "cdn": "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"
   },
   {
     "name": "Intercom",

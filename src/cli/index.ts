@@ -6,7 +6,8 @@ import Table from 'cli-table3';
 import fs from 'node:fs';
 import path from 'node:path';
 
-import { unpackWebpack4, unpackWebpack5, unpackVite, unpackRollup, BundleModule } from '../index';
+import { unpackWebpack4, unpackWebpack5, unpackVite, unpackRollup, unpackBrowserify, unpackEsbuild, BundleModule } from '../index';
+import { extractInlineSourceMap, recoverSourcesFromSourceMap } from '../index';
 import { detectLibraries } from '../index';
 import { filterOriginalModules } from '../index';
 import { extractEndpoints } from '../index';
@@ -33,6 +34,10 @@ program
 
     const code = fs.readFileSync(filePath, 'utf-8');
 
+    // Step 0: Check for inline SourceMap
+    const inlineMap = extractInlineSourceMap(code);
+    let recoveredFromMap = false;
+
     // Step 1: Unpack modules
     let modules: BundleModule[] = unpackWebpack5(code);
     let bundleType = 'Webpack 5';
@@ -48,6 +53,22 @@ program
     if (modules.length === 0) {
       modules = unpackRollup(code);
       bundleType = 'Rollup IIFE';
+    }
+    if (modules.length === 0) {
+      modules = unpackBrowserify(code);
+      bundleType = 'Browserify';
+    }
+    if (modules.length === 0) {
+      modules = unpackEsbuild(code);
+      bundleType = 'Esbuild';
+    }
+
+    if (inlineMap && inlineMap.sourcesContent) {
+      const recovered = recoverSourcesFromSourceMap(inlineMap);
+      if (recovered.length > 0) {
+        recoveredFromMap = true;
+        bundleType += ' (SourceMap Recovered)';
+      }
     }
 
     // Step 2: Filter original code

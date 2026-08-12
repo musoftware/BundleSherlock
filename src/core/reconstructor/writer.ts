@@ -23,8 +23,13 @@ export interface ManifestData {
   }>;
 }
 
+import { deobfuscateCode } from './deobfuscator';
+
 export function cleanModuleCode(code: string): string {
   let cleaned = code.trim();
+
+  // Deobfuscate boolean and void shorthand
+  cleaned = deobfuscateCode(cleaned);
 
   // Remove trailing comma or semicolon
   if (cleaned.endsWith(',')) cleaned = cleaned.slice(0, -1);
