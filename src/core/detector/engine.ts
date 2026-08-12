@@ -1,4 +1,4 @@
-import fingerprints from './fingerprints.json' with { type: 'json' };
+import fingerprints from './fingerprints.json';
 
 export interface LibrarySignature {
   name: string;

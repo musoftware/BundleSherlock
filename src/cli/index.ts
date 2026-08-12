@@ -6,11 +6,11 @@ import Table from 'cli-table3';
 import fs from 'node:fs';
 import path from 'node:path';
 
-import { unpackWebpack4, unpackWebpack5, unpackVite, unpackRollup, BundleModule } from '../index.js';
-import { detectLibraries } from '../index.js';
-import { filterOriginalModules } from '../index.js';
-import { extractEndpoints } from '../index.js';
-import { extractSecrets } from '../index.js';
+import { unpackWebpack4, unpackWebpack5, unpackVite, unpackRollup, BundleModule } from '../index';
+import { detectLibraries } from '../index';
+import { filterOriginalModules } from '../index';
+import { extractEndpoints } from '../index';
+import { extractSecrets } from '../index';
 
 const program = new Command();
 

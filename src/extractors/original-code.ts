@@ -1,4 +1,4 @@
-import { BundleModule } from '../unpackers/webpack4.js';
+import { BundleModule } from '../core/unpackers/webpack4.js';
 
 export function isOriginalModule(module: BundleModule): boolean {
   // Rule 1: Very large size with very few lines is minified third-party vendor library

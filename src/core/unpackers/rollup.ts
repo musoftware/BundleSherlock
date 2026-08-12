@@ -1,4 +1,4 @@
-import { BundleModule } from './webpack4.js';
+import { BundleModule } from './webpack4';
 
 export function unpackRollup(code: string): BundleModule[] {
   const modules: BundleModule[] = [];
