@@ -52,6 +52,48 @@ export function inferFilePath(module: BundleModule, isOriginal: boolean): string
   return classified.relativePath;
 }
 
+export function generateConnectedAppJsx(extractedModules: Array<{ filePath: string; id: string }>): string {
+  const imports: string[] = [];
+  const serviceCalls: string[] = [];
+
+  extractedModules.forEach((mod, idx) => {
+    const modName = `ExtractedModule_${idx + 1}`;
+    const cleanRelPath = './' + mod.filePath.replace(/^src[\\\/]/, '').replace(/\\/g, '/');
+    imports.push(`import * as ${modName} from '${cleanRelPath}';`);
+    serviceCalls.push(`    try { console.log("Initializing ${cleanRelPath}:", ${modName}); } catch(e) {}`);
+  });
+
+  return `import React, { useEffect } from 'react';
+${imports.join('\n')}
+
+export function App() {
+  useEffect(() => {
+    console.log("🕵️ BundleSherlock Application Core Started");
+${serviceCalls.join('\n')}
+  }, []);
+
+  return (
+    <div style={{ padding: '2rem', fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+      <header style={{ marginBottom: '2rem', borderBottom: '1px solid #444', paddingBottom: '1rem' }}>
+        <h1 style={{ color: '#646cff' }}>🕵️ BundleSherlock Reconstructed Application</h1>
+        <p>Successfully unbundled, linked, and connected <strong>${extractedModules.length}</strong> original application modules.</p>
+      </header>
+      <main>
+        <div style={{ background: '#1a1a1a', padding: '1.5rem', borderRadius: '8px', color: '#fff' }}>
+          <h3 style={{ marginTop: 0 }}>📦 Connected Application Modules:</h3>
+          <ul style={{ lineHeight: '1.8' }}>
+            ${extractedModules.map(m => `<li><code>./src/${m.filePath.replace(/^src[\\\/]/, '').replace(/\\/g, '/')}</code></li>`).join('\n            ')}
+          </ul>
+        </div>
+      </main>
+    </div>
+  );
+}
+
+export default App;
+`;
+}
+
 export function extractAndSaveSourceCode(
   modules: BundleModule[],
   options: ExtractionOptions
@@ -73,6 +115,8 @@ export function extractAndSaveSourceCode(
     const relPath = inferFilePath(mod, isOrig);
     moduleMap.set(String(mod.id), './' + relPath);
   });
+
+  const extractedAppModules: Array<{ filePath: string; id: string }> = [];
 
   modules.forEach(mod => {
     const isOrig = isOriginalModule(mod);
@@ -103,7 +147,18 @@ export function extractAndSaveSourceCode(
       size: mod.size,
       lines: mod.lines
     });
+
+    if (isOrig) {
+      extractedAppModules.push({ filePath: relativeFilePath, id: String(mod.id) });
+    }
   });
+
+  // Overwrite src/App.jsx with connected app component if src directory exists
+  const srcDir = path.join(targetDir, 'src');
+  if (fs.existsSync(srcDir) && extractedAppModules.length > 0) {
+    const connectedAppJsx = generateConnectedAppJsx(extractedAppModules);
+    fs.writeFileSync(path.join(srcDir, 'App.jsx'), connectedAppJsx, 'utf-8');
+  }
 
   // Write manifest.json
   const manifestPath = path.join(targetDir, 'manifest.json');
