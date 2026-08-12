@@ -2,8 +2,10 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { BundleModule } from '../unpackers/webpack4';
 import { isOriginalModule } from '../../extractors/original-code';
-import { extractEndpoints } from '../../extractors/endpoints';
-import { extractSecrets } from '../../extractors/secrets';
+import { deobfuscateCode } from './deobfuscator';
+import { classifyModuleStructure } from './classifier';
+import { linkModuleAST } from '../ast/graph';
+import { renameSemanticIdentifiers } from '../ast/renamer';
 
 export interface ExtractionOptions {
   outputDir: string;
@@ -23,13 +25,14 @@ export interface ManifestData {
   }>;
 }
 
-import { deobfuscateCode } from './deobfuscator';
-
 export function cleanModuleCode(code: string): string {
   let cleaned = code.trim();
 
   // Deobfuscate boolean and void shorthand
   cleaned = deobfuscateCode(cleaned);
+
+  // Rename minified identifiers with semantic names
+  cleaned = renameSemanticIdentifiers(cleaned);
 
   // Remove trailing comma or semicolon
   if (cleaned.endsWith(',')) cleaned = cleaned.slice(0, -1);
@@ -43,8 +46,6 @@ export function cleanModuleCode(code: string): string {
 
   return cleaned;
 }
-
-import { classifyModuleStructure } from './classifier';
 
 export function inferFilePath(module: BundleModule, isOriginal: boolean): string {
   const classified = classifyModuleStructure(module, isOriginal);
@@ -65,6 +66,14 @@ export function extractAndSaveSourceCode(
     modules: []
   };
 
+  // Build module map for AST linking
+  const moduleMap = new Map<string, string>();
+  modules.forEach(mod => {
+    const isOrig = isOriginalModule(mod);
+    const relPath = inferFilePath(mod, isOrig);
+    moduleMap.set(String(mod.id), './' + relPath);
+  });
+
   modules.forEach(mod => {
     const isOrig = isOriginalModule(mod);
     if (isOrig) manifest.originalModulesCount++;
@@ -78,10 +87,13 @@ export function extractAndSaveSourceCode(
 
     fs.mkdirSync(path.dirname(fullPath), { recursive: true });
 
-    const cleanedCode = cleanModuleCode(mod.code);
+    let cleanedCode = cleanModuleCode(mod.code);
+
+    // Apply AST dependency graph linking
+    cleanedCode = linkModuleAST({ ...mod, code: cleanedCode }, moduleMap);
 
     // Add module metadata header comment
-    const header = `/**\n * 🕵️ BundleSherlock Extracted Module\n * ID: ${mod.id}\n * Type: ${isOrig ? 'Original Application Code' : 'Third-Party Vendor'}\n */\n\n`;
+    const header = `/**\n * 🕵️ BundleSherlock Extracted & Linked Module\n * ID: ${mod.id}\n * Type: ${isOrig ? 'Original Application Code' : 'Third-Party Vendor'}\n */\n\n`;
     fs.writeFileSync(fullPath, header + cleanedCode, 'utf-8');
 
     manifest.modules.push({

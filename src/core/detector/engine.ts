@@ -9,7 +9,7 @@ export interface LibrarySignature {
   cdn?: string;
 }
 
-export interface DetectionResult {
+export interface LibraryDetectionResult {
   name: string;
   category: string;
   confidence: number;
@@ -17,8 +17,8 @@ export interface DetectionResult {
   cdn?: string;
 }
 
-export function detectLibraries(code: string): DetectionResult[] {
-  const results: DetectionResult[] = [];
+export function detectLibraries(code: string): LibraryDetectionResult[] {
+  const results: LibraryDetectionResult[] = [];
   const libs: LibrarySignature[] = fingerprints as LibrarySignature[];
 
   for (const lib of libs) {

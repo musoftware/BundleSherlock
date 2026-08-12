@@ -13,6 +13,7 @@ import { filterOriginalModules } from '../index';
 import { extractEndpoints } from '../index';
 import { extractSecrets } from '../index';
 import { extractAndSaveSourceCode } from '../index';
+import { generateProjectScaffold } from '../core/scaffold/generator';
 
 const program = new Command();
 
@@ -158,20 +159,24 @@ program
     }
 
     console.log(chalk.bold.cyan('---------------------------------------------------'));
-    if (options.output) {
-      console.log(chalk.bold.yellow(`🚀 Extracting source code files to: ${options.output}...`));
-      const manifest = extractAndSaveSourceCode(modules, {
-        outputDir: options.output,
-        onlyOriginal: options.onlyOriginal
-      });
-      console.log(chalk.bold.green(`📁 Successfully saved ${manifest.modules.length} file(s) into '${options.output}'`));
-      console.log(chalk.gray(`   See '${options.output}/manifest.json' for module catalog.`));
-      console.log(chalk.bold.cyan('---------------------------------------------------\n'));
-    } else {
-      console.log(chalk.gray('  Run with --json for raw data output.'));
-      console.log(chalk.gray('  Run with -o <dir> to dump full source code files.'));
-      console.log(chalk.bold.cyan('---------------------------------------------------\n'));
-    }
+    const targetOutDir = options.output || './extracted_app';
+    console.log(chalk.bold.yellow(`🚀 Reconstructing Runnable Project Scaffold in: ${targetOutDir}...`));
+    
+    // Step 1: Generate runnable project scaffold (package.json, vite.config.js, index.html, main.jsx, App.jsx)
+    generateProjectScaffold({
+      outputDir: targetOutDir,
+      detectedLibraries: libraries
+    });
+    console.log(chalk.bold.green(`📦 Generated 'package.json' with ${libraries.length} detected framework dependencies.`));
+
+    // Step 2: Unpack & AST Link Original Application Source Files
+    const manifest = extractAndSaveSourceCode(modules, {
+      outputDir: targetOutDir,
+      onlyOriginal: options.onlyOriginal !== false
+    });
+    console.log(chalk.bold.green(`📁 Successfully linked and saved ${manifest.modules.length} file(s) into '${targetOutDir}'`));
+    console.log(chalk.gray(`   See '${targetOutDir}/manifest.json' for module catalog.`));
+    console.log(chalk.bold.cyan('---------------------------------------------------\n'));
   });
 
 program.parse();
