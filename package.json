@@ -1,0 +1,38 @@
+{
+  "name": "bundle-sherlock",
+  "version": "1.0.0",
+  "description": "JS bundle inspector, library fingerprint detector, endpoint extractor, and secret scanner",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "bundle-sherlock": "dist/cli/index.js"
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "start": "node dist/cli/index.js"
+  },
+  "keywords": [
+    "webpack",
+    "vite",
+    "bundle",
+    "unpacker",
+    "fingerprint",
+    "reverse-engineering",
+    "secret-scanner",
+    "endpoints"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "cli-table3": "^0.6.5",
+    "commander": "^12.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.9",
+    "tsup": "^8.1.0",
+    "typescript": "^5.5.2"
+  }
+}
