@@ -23,8 +23,9 @@ program
   .argument('<file>', 'Path to JavaScript bundle file')
   .option('-j, --json', 'Output report in JSON format')
   .option('-o, --output <dir>', 'Extract and save full source code modules to target directory')
+  .option('-t, --target <preset>', 'Extraction target preset (generic, saas, ecommerce)', 'generic')
   .option('--only-original', 'When saving output, extract original application code only')
-  .action((file: string, options: { json?: boolean; output?: string; onlyOriginal?: boolean }) => {
+  .action((file: string, options: { json?: boolean; output?: string; target?: string; onlyOriginal?: boolean }) => {
     const filePath = path.resolve(process.cwd(), file);
 
     if (!fs.existsSync(filePath)) {

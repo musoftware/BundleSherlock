@@ -14,10 +14,10 @@ export const appRules: DetectionRule[] = [
     weight: 30
   },
   {
-    name: 'React Application State & Hooks',
+    name: 'Custom Application Hooks',
     category: 'app',
-    signatures: ['useState(', 'useEffect(', 'useContext(', 'useCallback(', 'useMemo(', 'useRef('],
-    weight: 15
+    signatures: ['useAuth()', 'useUser()', 'useCart()', 'useSession()', 'useCheckout()'],
+    weight: 25
   },
   {
     name: 'Router & Navigation Commands',

@@ -2,8 +2,8 @@ import { DetectionRule } from '../rules/types';
 import { uiRules } from '../rules/ui.rules';
 import { editorRules } from '../rules/editor.rules';
 import { polyfillRules } from '../rules/polyfill.rules';
-import { appRules } from '../rules/app.rules';
 import { vendorRules } from '../rules/vendor.rules';
+import { originalRules } from '../rules/original.rules';
 
 export function getAllRules(): DetectionRule[] {
   return [
@@ -14,6 +14,6 @@ export function getAllRules(): DetectionRule[] {
   ];
 }
 
-export function getAppRules(): DetectionRule[] {
-  return appRules;
+export function getOriginalRules(): DetectionRule[] {
+  return originalRules;
 }

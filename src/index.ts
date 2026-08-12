@@ -11,6 +11,7 @@ export * from './core/detector/rules/editor.rules';
 export * from './core/detector/rules/polyfill.rules';
 export * from './core/detector/rules/app.rules';
 export * from './core/detector/rules/vendor.rules';
+export * from './core/detector/rules/original.rules';
 export * from './core/detector/engine/loader';
 export * from './core/detector/engine/scorer';
 export * from './core/detector/engine/auto-generator';

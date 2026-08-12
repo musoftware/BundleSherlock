@@ -1,17 +1,28 @@
-export type RuleCategory = 'ui' | 'editor' | 'polyfill' | 'vendor' | 'app';
+export type RuleCategory = 
+  | 'vendor_ui' 
+  | 'vendor_editor' 
+  | 'vendor_polyfill' 
+  | 'vendor_framework' 
+  | 'original_app' 
+  | 'app' 
+  | 'ui' 
+  | 'editor' 
+  | 'polyfill' 
+  | 'vendor';
 
 export interface DetectionRule {
   name: string;
   category: RuleCategory;
-  signatures: string[];
-  weight: number;
-  penaltyIf?: string[]; // Exception patterns: if present, reduce vendor score or treat as original
+  signatures: (string | RegExp)[];
+  weight: number; // Positive for vendor (+20 to +50), Negative for application (-30 to -100)
+  antiSignatures?: string[]; // If present in code, cancels vendor rule match
 }
 
 export interface DetectionResult {
   isOriginal: boolean;
   type: 'ORIGINAL' | 'VENDOR' | 'UNKNOWN';
   confidence: number; // 0 - 100
+  totalScore: number;
   vendorScore: number;
   originalScore: number;
   matchedRules: string[];

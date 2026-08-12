@@ -2,51 +2,45 @@ import { DetectionRule } from './types';
 
 export const vendorRules: DetectionRule[] = [
   {
-    name: 'React UI Framework',
-    category: 'vendor',
-    signatures: ['__REACT_DEVTOOLS_GLOBAL_HOOK__', 'React.createElement', 'ReactDOM.render'],
-    weight: 20
+    name: 'React Core',
+    category: 'vendor_framework',
+    signatures: [
+      '__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED',
+      'ReactCurrentOwner',
+      /Symbol\.for\(["']react\.element["']\)/,
+      'useStateImpl'
+    ],
+    weight: 50,
+    antiSignatures: ['/api/']
   },
   {
-    name: 'Vue.js Framework',
-    category: 'vendor',
-    signatures: ['__VUE_DEVTOOLS_GLOBAL_HOOK__', 'createApp', 'defineComponent'],
-    weight: 20
+    name: 'Vue.js Core',
+    category: 'vendor_framework',
+    signatures: [
+      '__VUE_DEVTOOLS_GLOBAL_HOOK__',
+      '__v_isRef',
+      '__v_isVNode'
+    ],
+    weight: 50
   },
   {
-    name: 'Angular Framework',
-    category: 'vendor',
-    signatures: ['ngDevMode', 'ɵɵdefineComponent', 'ɵɵelementStart', 'ng-version'],
-    weight: 20
+    name: 'Angular Core',
+    category: 'vendor_framework',
+    signatures: [
+      'ɵɵdefineComponent',
+      'ɵɵelementStart',
+      'ng-version="'
+    ],
+    weight: 50
   },
   {
     name: 'Lodash Utility',
-    category: 'vendor',
-    signatures: ['lodash', 'debounce', 'throttle', 'isPlainObject', 'cloneDeep'],
-    weight: 15
-  },
-  {
-    name: 'Date-fns Utility',
-    category: 'vendor',
-    signatures: ['formatDistance', 'differenceInDays', 'isAfter', 'isBefore'],
-    weight: 15
-  },
-  {
-    name: 'RxJS Reactive',
-    category: 'vendor',
-    signatures: ['Observable', 'BehaviorSubject', 'switchMap'],
-    weight: 20
-  },
-  {
-    name: 'Three.js 3D Engine',
-    category: 'vendor',
-    signatures: ['THREE.WebGLRenderer', 'THREE.PerspectiveCamera', 'THREE.Mesh'],
-    weight: 25
-  },
-  {
-    name: 'D3.js Data Visualization',
-    category: 'vendor',
-    signatures: ['d3.select', 'd3.selectAll', 'd3.scaleLinear'],
-    weight: 20
+    category: 'vendor_framework',
+    signatures: [
+      'lodash__WEBPACK_IMPORTED_MODULE',
+      '__lodash__',
+      /function\s+isPlainObject\(e\)\{\s*return\s*!.*isObjectLike/
+    ],
+    weight: 35
   }
 ];
