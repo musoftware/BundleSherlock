@@ -47,3 +47,4 @@ coverage/
 *.tsbuildinfo
 example/*
 tests/projects/
+extracted_app/
