@@ -1,0 +1,7 @@
+/**
+ * 🕵️ BundleSherlock Extracted Module
+ * ID: value
+ * Type: Original Application Code
+ */
+
+var n=t&&t.container;lxe||(lxe=new e({isDeprecatedApi:!0,isEmbed:n})),ixe("PaystackPop.setup()","new PaystackPop()","Please consult our documentation at https://developers.paystack.co/docs/paystack-inline");var o=lxe.newTransaction(t,"deprecated"),a=o.urlParameters;if(n){var r="".concat(qze.siteUrl,"/assets/payment/production/inline.html?").concat(Wze(a)),i=function(e,t){var n=Uze("embed-checkout-".concat(e));return n.style.cssText="\n  background: transparent;\n  background: rgba(0,0,0,0);\n  border: 0px none transparent;\n  overflow-x: hidden;\n  overflow-y: hidden;\n  nmargin: 0;\n  padding: 0;\n  -webkit-tap-highlight-color: transparent;\n  -webkit-touch-callout: none;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  visibility: hidden;\n  display: none;\n",n.src=t,n.id=e,n.name=e,n}(lxe.id,r);!function(e,t){var n=document.getElementById(e);n.innerHTML="",n.removeAttribute("style"),n.className="paystack-embed-container",n.style.position="relative",n.style.width="100%",n.appendChild(t)}(t.container,i),i.onload=function(){var e;i.contentWindow.postMessage("PaystackOpen ".concat(lxe.id),"*"),e=i,new Promise((function(t,n){e||n("No dom element provided"),e.style.display="",e.style.visibility="visible",t()}))}}else o.openIframe=function(){ixe("openIframe","open","Please consult our documentation at https://developers.paystack.co/docs/paystack-inline"),lxe.open(a)};return o

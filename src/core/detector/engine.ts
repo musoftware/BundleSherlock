@@ -22,30 +22,37 @@ export function detectLibraries(code: string): DetectionResult[] {
   const libs: LibrarySignature[] = fingerprints as LibrarySignature[];
 
   for (const lib of libs) {
+    let matchesCount = 0;
     let score = 0;
     const maxScore = lib.signatures.length * lib.weight;
 
     for (const sig of lib.signatures) {
       try {
-        const regex = new RegExp(sig, 'i');
+        // Escape standard string characters if not regex
+        const safeSig = sig.replace(/([.*+?^${}()|[\]\\])/g, '\\$1');
+        const regex = new RegExp(`\\b${safeSig}\\b`, 'i');
         if (regex.test(code)) {
+          matchesCount++;
           score += lib.weight;
         }
       } catch {
         if (code.includes(sig)) {
+          matchesCount++;
           score += lib.weight;
         }
       }
     }
 
-    if (score > 0) {
-      const rawConfidence = (score / maxScore) * 100;
-      const confidence = Math.min(100, Math.round(rawConfidence > 50 ? 95 : rawConfidence > 20 ? 70 : 40));
+    // Require at least 2 signature matches or 50%+ ratio to eliminate false positives
+    const matchRatio = matchesCount / lib.signatures.length;
+    if (matchesCount >= 2 || (matchesCount === 1 && matchRatio >= 0.5 && lib.signatures[0].length > 10)) {
+      const rawConfidence = Math.round((score / maxScore) * 100);
+      const confidence = Math.min(100, Math.max(50, rawConfidence));
 
       let version: string | undefined = undefined;
       if (lib.versionRegex) {
         try {
-          const vMatch = new RegExp(lib.versionRegex).exec(code);
+          const vMatch = new RegExp(lib.versionRegex, 'i').exec(code);
           if (vMatch && vMatch[1]) {
             version = vMatch[1];
           }

@@ -11,6 +11,7 @@ import { detectLibraries } from '../index';
 import { filterOriginalModules } from '../index';
 import { extractEndpoints } from '../index';
 import { extractSecrets } from '../index';
+import { extractAndSaveSourceCode } from '../index';
 
 const program = new Command();
 
@@ -20,7 +21,9 @@ program
   .version('1.0.0')
   .argument('<file>', 'Path to JavaScript bundle file')
   .option('-j, --json', 'Output report in JSON format')
-  .action((file: string, options: { json?: boolean }) => {
+  .option('-o, --output <dir>', 'Extract and save full source code modules to target directory')
+  .option('--only-original', 'When saving output, extract original application code only')
+  .action((file: string, options: { json?: boolean; output?: string; onlyOriginal?: boolean }) => {
     const filePath = path.resolve(process.cwd(), file);
 
     if (!fs.existsSync(filePath)) {
@@ -133,8 +136,20 @@ program
     }
 
     console.log(chalk.bold.cyan('---------------------------------------------------'));
-    console.log(chalk.gray('  Run with --json for raw data output.'));
-    console.log(chalk.bold.cyan('---------------------------------------------------\n'));
+    if (options.output) {
+      console.log(chalk.bold.yellow(`🚀 Extracting source code files to: ${options.output}...`));
+      const manifest = extractAndSaveSourceCode(modules, {
+        outputDir: options.output,
+        onlyOriginal: options.onlyOriginal
+      });
+      console.log(chalk.bold.green(`📁 Successfully saved ${manifest.modules.length} file(s) into '${options.output}'`));
+      console.log(chalk.gray(`   See '${options.output}/manifest.json' for module catalog.`));
+      console.log(chalk.bold.cyan('---------------------------------------------------\n'));
+    } else {
+      console.log(chalk.gray('  Run with --json for raw data output.'));
+      console.log(chalk.gray('  Run with -o <dir> to dump full source code files.'));
+      console.log(chalk.bold.cyan('---------------------------------------------------\n'));
+    }
   });
 
 program.parse();
